@@ -29,15 +29,19 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Start Express server
-if ('port') {
+if (typeof app.get('port') !== 'undefined') {
   app.listen(app.get('port'), () => {
     console.log(
-      '  App is running at http://localhost:%d in %s mode',
+      'App is running at http://localhost:%d in %s mode',
       app.get('port'),
       app.get('env')
     )
-    console.log('  Press CTRL-C to stop\n')
+    console.log('Press CTRL-C to stop\n')
   })
+} else {
+  console.error(
+    'Port is not defined. Please set the PORT environment variable.'
+  )
 }
 
 export default server

@@ -27,11 +27,14 @@ if (process.env.NODE_ENV === 'development') {
     app_1.app.use((0, errorhandler_1.default)());
 }
 // Start Express server
-if ('port') {
+if (typeof app_1.app.get('port') !== 'undefined') {
     app_1.app.listen(app_1.app.get('port'), () => {
-        console.log('  App is running at http://localhost:%d in %s mode', app_1.app.get('port'), app_1.app.get('env'));
-        console.log('  Press CTRL-C to stop\n');
+        console.log('App is running at http://localhost:%d in %s mode', app_1.app.get('port'), app_1.app.get('env'));
+        console.log('Press CTRL-C to JAAJ stop\n');
     });
+}
+else {
+    console.error('Port is not defined. Please set the PORT environment variable.');
 }
 exports.default = server;
 //# sourceMappingURL=index.js.map
