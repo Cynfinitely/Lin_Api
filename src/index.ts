@@ -32,7 +32,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Start Express server
 app.get('/', (_req: Request, res: Response) => {
-  return res.send('Express Typescript on Vercel')
+  return res.send('Express Typescript on Vercel, WORKING YEA!')
 })
 
 app.get('/ping', (_req: Request, res: Response) => {
