@@ -3,8 +3,10 @@ import mongoose from 'mongoose'
 import { app } from './app'
 import { MONGODB_URI } from './util/secrets'
 import logger from './util/logger'
+import { Request, Response } from 'express'
 
 const mongoUrl = MONGODB_URI
+const port = process.env.PORT || 5000
 
 mongoose
   .connect(mongoUrl)
@@ -29,19 +31,16 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // Start Express server
-if (typeof app.get('port') !== 'undefined') {
-  app.listen(app.get('port'), () => {
-    console.log(
-      'App is running at http://localhost:%d in %s mode',
-      app.get('port'),
-      app.get('env')
-    )
-    console.log('Press CTRL-C to stop\n')
-  })
-} else {
-  console.error(
-    'Port is not defined. Please set the PORT environment variable.'
-  )
-}
+app.get('/', (_req: Request, res: Response) => {
+  return res.send('Express Typescript on Vercel')
+})
+
+app.get('/ping', (_req: Request, res: Response) => {
+  return res.send('pong 🏓')
+})
+
+app.listen(port, () => {
+  return console.log(`Server is listening on ${port}`)
+})
 
 export default server
